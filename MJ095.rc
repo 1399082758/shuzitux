@@ -182,6 +182,15 @@ BEGIN
     DEFPUSHBUTTON   "È·¶¨",IDOK,178,7,50,14,WS_GROUP
 END
 
+IDD_IDD_HISTOGRAM_DIALOG DIALOG DISCARDABLE  0, 0, 460, 303
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,403,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,403,24,50,14
+END
+
 
 #ifndef _MAC
 /////////////////////////////////////////////////////////////////////////////
@@ -243,6 +252,14 @@ BEGIN
         RIGHTMARGIN, 228
         TOPMARGIN, 7
         BOTTOMMARGIN, 48
+    END
+
+    IDD_IDD_HISTOGRAM_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 453
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 296
     END
 END
 #endif    // APSTUDIO_INVOKED

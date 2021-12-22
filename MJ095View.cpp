@@ -6,7 +6,7 @@
 
 #include "MJ095Doc.h"
 #include "MJ095View.h"
-#include "DlgHistogram.h"
+#include "IDD_HISTOGRAM.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -24,7 +24,8 @@ BEGIN_MESSAGE_MAP(CMJ095View, CScrollView)
 	ON_COMMAND(ID_GRAY, OnGray)
 	ON_UPDATE_COMMAND_UI(ID_GRAY, OnUpdateGray)
 	ON_WM_MOUSEMOVE()
-	
+	ON_COMMAND(ID_Histogram, OnHistogram)
+	ON_UPDATE_COMMAND_UI(ID_Histogram, OnUpdateHistogram)
 	//}}AFX_MSG_MAP
 	// Standard printing commands
 	ON_COMMAND(ID_FILE_PRINT, CScrollView::OnFilePrint)
@@ -169,3 +170,16 @@ void CMJ095View::OnMouseMove(UINT nFlags, CPoint point)
 }
 
 	
+
+void CMJ095View::OnHistogram() 
+{
+	// TODO: Add your command handler code here
+	IDD_HISTOGRAM dlg;
+	dlg.DoModal();
+}
+
+void CMJ095View::OnUpdateHistogram(CCmdUI* pCmdUI) 
+{
+	// TODO: Add your command update UI handler code here
+	pCmdUI->Enable(lpBitsInfo!=NULL);
+}

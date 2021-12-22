@@ -119,6 +119,8 @@ public:
 protected:
 	//{{AFX_MSG(CAboutDlg)
 	virtual BOOL OnInitDialog();
+	afx_msg void OnHistogram();
+	afx_msg void OnUpdateHistogram(CCmdUI* pCmdUI);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };
@@ -138,6 +140,8 @@ void CAboutDlg::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(CAboutDlg, CDialog)
 	//{{AFX_MSG_MAP(CAboutDlg)
+	ON_COMMAND(ID_Histogram, OnHistogram)
+	ON_UPDATE_COMMAND_UI(ID_Histogram, OnUpdateHistogram)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -160,4 +164,16 @@ BOOL CAboutDlg::OnInitDialog()
 	
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
+}
+
+void CAboutDlg::OnHistogram() 
+{
+	// TODO: Add your command handler code here
+	
+}
+
+void CAboutDlg::OnUpdateHistogram(CCmdUI* pCmdUI) 
+{
+	// TODO: Add your command update UI handler code here
+	
 }

@@ -2,24 +2,27 @@
 
 [General Info]
 Version=1
-LastClass=CAboutDlg
+LastClass=CMJ095View
 LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "mj095.h"
 LastPage=0
 
-ClassCount=6
+ClassCount=7
 Class1=CMainFrame
 Class2=CMJ095App
 Class3=CAboutDlg
 Class4=CMJ095Doc
 Class5=CMJ095View
 
-ResourceCount=3
-Resource1=IDD_ABOUTBOX
-Resource2=IDR_MAINFRAME
+ResourceCount=5
+Resource1=IDR_MAINFRAME
+Resource2=IDD_DIALOG1
 Class6=CDlgHistogram
 Resource3=IDD_DIALOGBAR (English (U.S.))
+Resource4=IDD_ABOUTBOX
+Class7=IDD_HISTOGRAM
+Resource5=IDD_IDD_HISTOGRAM_DIALOG
 
 [CLS:CMainFrame]
 Type=0
@@ -40,7 +43,7 @@ Type=0
 BaseClass=CDialog
 HeaderFile=MJ095.cpp
 ImplementationFile=MJ095.cpp
-LastObject=CAboutDlg
+LastObject=ID_Histogram
 Filter=D
 VirtualFilter=dWC
 
@@ -71,7 +74,7 @@ Control4=IDOK,button,1342373889
 
 [TB:IDR_MAINFRAME]
 Type=1
-Class=?
+Class=CAboutDlg
 Command1=ID_FILE_NEW
 Command2=ID_FILE_OPEN
 Command3=ID_FILE_SAVE
@@ -138,4 +141,27 @@ Type=1
 Class=?
 ControlCount=1
 Control1=IDC_STATIC,static,1342308352
+
+[DLG:IDD_DIALOG1]
+Type=1
+Class=?
+ControlCount=2
+Control1=IDOK,button,1342242817
+Control2=IDCANCEL,button,1342242816
+
+[DLG:IDD_IDD_HISTOGRAM_DIALOG]
+Type=1
+Class=IDD_HISTOGRAM
+ControlCount=2
+Control1=IDOK,button,1342242817
+Control2=IDCANCEL,button,1342242816
+
+[CLS:IDD_HISTOGRAM]
+Type=0
+HeaderFile=IDD_HISTOGRAM.h
+ImplementationFile=IDD_HISTOGRAM.cpp
+BaseClass=CDialog
+Filter=D
+LastObject=IDD_HISTOGRAM
+VirtualFilter=dWC
 

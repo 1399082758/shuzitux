@@ -172,7 +172,7 @@ DWORD H[256];
 DWORD H_R[256];
 DWORD H_G[256];
 DWORD H_B[256];
-void histogram(){
+void Histogram(){
 
 	int w = lpBitsInfo->bmiHeader.biWidth;
 	int h = lpBitsInfo->bmiHeader.biHeight;
