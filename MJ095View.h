@@ -54,6 +54,8 @@ protected:
 	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
 	afx_msg void OnHistogram();
 	afx_msg void OnUpdateHistogram(CCmdUI* pCmdUI);
+	afx_msg void OnLine();
+	afx_msg void OnUpdateLine(CCmdUI* pCmdUI);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

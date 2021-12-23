@@ -7,6 +7,7 @@
 #include "MJ095Doc.h"
 #include "MJ095View.h"
 #include "IDD_HISTOGRAM.h"
+#include "LINEDIALOG.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -26,6 +27,8 @@ BEGIN_MESSAGE_MAP(CMJ095View, CScrollView)
 	ON_WM_MOUSEMOVE()
 	ON_COMMAND(ID_Histogram, OnHistogram)
 	ON_UPDATE_COMMAND_UI(ID_Histogram, OnUpdateHistogram)
+	ON_COMMAND(ID_LINE, OnLine)
+	ON_UPDATE_COMMAND_UI(ID_LINE, OnUpdateLine)
 	//}}AFX_MSG_MAP
 	// Standard printing commands
 	ON_COMMAND(ID_FILE_PRINT, CScrollView::OnFilePrint)
@@ -181,5 +184,20 @@ void CMJ095View::OnHistogram()
 void CMJ095View::OnUpdateHistogram(CCmdUI* pCmdUI) 
 {
 	// TODO: Add your command update UI handler code here
-	pCmdUI->Enable(lpBitsInfo!=NULL);
+	pCmdUI->Enable(lpBitsInfo!=NULL && 2 < lpBitsInfo->bmiHeader.biBitCount);
+}
+void linear(int a,int b);
+
+void CMJ095View::OnLine() 
+{
+	// TODO: Add your command handler code here
+	LINEDIALOG dia;
+	dia.DoModal();
+	Invalidate();
+}
+
+void CMJ095View::OnUpdateLine(CCmdUI* pCmdUI) 
+{
+	// TODO: Add your command update UI handler code here
+	pCmdUI->Enable(lpBitsInfo!=NULL && 2 < lpBitsInfo->bmiHeader.biBitCount);
 }

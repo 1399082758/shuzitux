@@ -98,6 +98,10 @@ SOURCE=.\IDD_HISTOGRAM.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\LINEDIALOG.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\MainFrm.cpp
 # End Source File
 # Begin Source File
@@ -128,6 +132,10 @@ SOURCE=.\StdAfx.cpp
 # Begin Source File
 
 SOURCE=.\IDD_HISTOGRAM.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\LINEDIALOG.h
 # End Source File
 # Begin Source File
 

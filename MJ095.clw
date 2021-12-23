@@ -2,13 +2,13 @@
 
 [General Info]
 Version=1
-LastClass=CMJ095View
+LastClass=LINEDIALOG
 LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "mj095.h"
 LastPage=0
 
-ClassCount=7
+ClassCount=8
 Class1=CMainFrame
 Class2=CMJ095App
 Class3=CAboutDlg
@@ -16,13 +16,14 @@ Class4=CMJ095Doc
 Class5=CMJ095View
 
 ResourceCount=5
-Resource1=IDR_MAINFRAME
-Resource2=IDD_DIALOG1
+Resource1=IDD_IDD_HISTOGRAM_DIALOG
+Resource2=IDR_MAINFRAME
 Class6=CDlgHistogram
 Resource3=IDD_DIALOGBAR (English (U.S.))
 Resource4=IDD_ABOUTBOX
 Class7=IDD_HISTOGRAM
-Resource5=IDD_IDD_HISTOGRAM_DIALOG
+Class8=LINEDIALOG
+Resource5=IDD_LINDIALOG
 
 [CLS:CMainFrame]
 Type=0
@@ -59,7 +60,7 @@ Type=0
 BaseClass=CScrollView
 HeaderFile=MJ095View.h
 ImplementationFile=MJ095View.cpp
-LastObject=ID_Histogram
+LastObject=ID_LINE
 Filter=C
 VirtualFilter=VWC
 
@@ -85,7 +86,8 @@ Command7=ID_FILE_PRINT
 Command8=ID_APP_ABOUT
 Command9=ID_GRAY
 Command10=ID_Histogram
-CommandCount=10
+Command11=ID_LINE
+CommandCount=11
 
 [MNU:IDR_MAINFRAME]
 Type=1
@@ -142,13 +144,6 @@ Class=?
 ControlCount=1
 Control1=IDC_STATIC,static,1342308352
 
-[DLG:IDD_DIALOG1]
-Type=1
-Class=?
-ControlCount=2
-Control1=IDOK,button,1342242817
-Control2=IDCANCEL,button,1342242816
-
 [DLG:IDD_IDD_HISTOGRAM_DIALOG]
 Type=1
 Class=IDD_HISTOGRAM
@@ -163,5 +158,26 @@ ImplementationFile=IDD_HISTOGRAM.cpp
 BaseClass=CDialog
 Filter=D
 LastObject=IDD_HISTOGRAM
+VirtualFilter=dWC
+
+[DLG:IDD_LINDIALOG]
+Type=1
+Class=LINEDIALOG
+ControlCount=7
+Control1=IDOK,button,1342242817
+Control2=IDCANCEL,button,1342242816
+Control3=IDC_EDIT1,edit,1350631552
+Control4=IDC_EDIT2,edit,1350631552
+Control5=IDC_STATIC,static,1342308352
+Control6=IDC_STATIC,static,1342308864
+Control7=IDC_STATIC,static,1342308352
+
+[CLS:LINEDIALOG]
+Type=0
+HeaderFile=LINEDIALOG.h
+ImplementationFile=LINEDIALOG.cpp
+BaseClass=CDialog
+Filter=D
+LastObject=ID_APP_ABOUT
 VirtualFilter=dWC
 
