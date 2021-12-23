@@ -29,6 +29,8 @@ BEGIN_MESSAGE_MAP(CMJ095View, CScrollView)
 	ON_UPDATE_COMMAND_UI(ID_Histogram, OnUpdateHistogram)
 	ON_COMMAND(ID_LINE, OnLine)
 	ON_UPDATE_COMMAND_UI(ID_LINE, OnUpdateLine)
+	ON_COMMAND(ID_EQUALIZATION, OnEqualization)
+	ON_UPDATE_COMMAND_UI(ID_EQUALIZATION, OnUpdateEqualization)
 	//}}AFX_MSG_MAP
 	// Standard printing commands
 	ON_COMMAND(ID_FILE_PRINT, CScrollView::OnFilePrint)
@@ -200,4 +202,18 @@ void CMJ095View::OnUpdateLine(CCmdUI* pCmdUI)
 {
 	// TODO: Add your command update UI handler code here
 	pCmdUI->Enable(lpBitsInfo!=NULL && 2 < lpBitsInfo->bmiHeader.biBitCount);
+}
+void equalization();
+void Histogram();
+void CMJ095View::OnEqualization() 
+{
+	// TODO: Add your command handler code here
+	equalization();
+	Invalidate();
+}
+
+void CMJ095View::OnUpdateEqualization(CCmdUI* pCmdUI) 
+{
+	// TODO: Add your command update UI handler code here
+	pCmdUI->Enable(lpBitsInfo!=NULL && 4 < lpBitsInfo->bmiHeader.biBitCount);
 }

@@ -121,6 +121,8 @@ protected:
 	virtual BOOL OnInitDialog();
 	afx_msg void OnHistogram();
 	afx_msg void OnUpdateHistogram(CCmdUI* pCmdUI);
+	afx_msg void OnEqualization();
+	afx_msg void OnUpdateEqualization(CCmdUI* pCmdUI);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };
@@ -142,6 +144,8 @@ BEGIN_MESSAGE_MAP(CAboutDlg, CDialog)
 	//{{AFX_MSG_MAP(CAboutDlg)
 	ON_COMMAND(ID_Histogram, OnHistogram)
 	ON_UPDATE_COMMAND_UI(ID_Histogram, OnUpdateHistogram)
+	ON_COMMAND(ID_EQUALIZATION, OnEqualization)
+	ON_UPDATE_COMMAND_UI(ID_EQUALIZATION, OnUpdateEqualization)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -173,6 +177,18 @@ void CAboutDlg::OnHistogram()
 }
 
 void CAboutDlg::OnUpdateHistogram(CCmdUI* pCmdUI) 
+{
+	// TODO: Add your command update UI handler code here
+	
+}
+
+void CAboutDlg::OnEqualization() 
+{
+	// TODO: Add your command handler code here
+	
+}
+
+void CAboutDlg::OnUpdateEqualization(CCmdUI* pCmdUI) 
 {
 	// TODO: Add your command update UI handler code here
 	

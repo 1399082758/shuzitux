@@ -99,6 +99,7 @@ BEGIN
     BUTTON      ID_Histogram
     SEPARATOR
     BUTTON      ID_LINE
+    BUTTON      ID_EQUALIZATION
 END
 
 

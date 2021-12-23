@@ -41,7 +41,7 @@ END_MESSAGE_MAP()
 /////////////////////////////////////////////////////////////////////////////
 // LINEDIALOG message handlers
 void linear(int a,int b);
-
+void Histogram();
 void LINEDIALOG::OnOK() 
 {
 	// TODO: Add extra validation here
@@ -49,5 +49,6 @@ void LINEDIALOG::OnOK()
 	edit1 = GetDlgItemInt(IDC_EDIT2);
 	edit2 = GetDlgItemInt(IDC_EDIT1);
 	linear(edit1,edit2);
+	Histogram();
 	CDialog::OnOK();
 }

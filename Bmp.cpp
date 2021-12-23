@@ -336,9 +336,9 @@ void linear(int a,int b){
 							bb = 255;
 						else if(bb < 0)
 							bb = 0;
-						lpBitsInfo->bmiColors[i].rgbRed = (BYTE)(r+0.5);
-						lpBitsInfo->bmiColors[i].rgbGreen = (BYTE)(g+0.5);
-						lpBitsInfo->bmiColors[i].rgbBlue = (BYTE)(bb+0.5); 
+						lpBitsInfo->bmiColors[*pixel].rgbRed = (BYTE)(r+0.5);
+						lpBitsInfo->bmiColors[*pixel].rgbGreen = (BYTE)(g+0.5);
+						lpBitsInfo->bmiColors[*pixel].rgbBlue = (BYTE)(bb+0.5); 
 					}
 				}
 			}
@@ -406,5 +406,79 @@ void linear(int a,int b){
 			default:break;
 	}
 }
+void equalization(){
+	int w = lpBitsInfo->bmiHeader.biWidth;
+	int h = lpBitsInfo->bmiHeader.biHeight;
+	int LineBytes = (w * lpBitsInfo->bmiHeader.biBitCount + 31)/32 * 4;
+	BYTE* lpBits = (BYTE*)&lpBitsInfo->bmiColors[lpBitsInfo->bmiHeader.biClrUsed];
 
+	int i,j;
+	BYTE *pixel;
+	BYTE Map[256];
+	BYTE MapR[256];
+	BYTE MapG[256];
+	BYTE MapB[256];
+	DWORD temp;
+	DWORD tempR;
+	DWORD tempG;
+	DWORD tempB;
+	bool if_gray();
+	void Histogram();
+	switch(lpBitsInfo->bmiHeader.biBitCount){
+	case 8:
+		Histogram();
+		if(if_gray()){
+		for(i = 0;i < 256;i++)
+		{
+			temp = 0;
+			for(j = 0;j <= i;j++)
+			{
+				temp += H[j];
+			}
+			Map[i] = (BYTE)(temp * 255 / (w * h) + 0.5);
+		}
+	
+		for(i = 0;i < h;i++)
+		{
+			for(j = 0;j < w;j++)
+			{
+				pixel = lpBits + LineBytes * (h - 1 - i) + j;
+				*pixel = Map[*pixel];
+			}
+		}
+		}
+		else{
+			break;		
+		}
+		break;
+
+	case 24:
+		Histogram();
+		for(i = 0;i < 256;i++)
+		{
+			tempR = tempG = tempB = 0;
+			for(j = 0;j <= i;j++)
+			{
+				tempR += H_R[j];
+				tempG += H_G[j];
+				tempB += H_B[j];
+			}
+			MapR[i] = (BYTE)(tempR * 255 / (w * h) + 0.5);
+			MapG[i] = (BYTE)(tempG * 255 / (w * h) + 0.5);
+			MapB[i] = (BYTE)(tempB * 255 / (w * h) + 0.5);
+		}
+	
+		for(i = 0;i < h;i++)
+		{	
+			for(j = 0;j < w;j++)
+			{
+				pixel = lpBits + LineBytes * (h - 1 - i) + j * 3;
+				*pixel = MapB[*pixel];
+				*(pixel+1) = MapG[*(pixel+1)];
+				*(pixel+2) = MapR[*(pixel+2)];
+			}
+		}
+		break;
+	}
+}
 
