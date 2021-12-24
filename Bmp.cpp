@@ -1,6 +1,12 @@
 #include "stdafx.h"
+#include <math.h>
+#include<complex>
+using namespace std;
+#define PI 3.14159265435
 
 BITMAPINFO* lpBitsInfo=NULL;
+BITMAPINFO* lpDIB_FT=NULL;
+BITMAPINFO* lpDIB_IFT=NULL;
 
 BOOL loadBmpFile(char* BmpFileName)
 {
@@ -481,4 +487,132 @@ void equalization(){
 		break;
 	}
 }
+void FT(complex<double>* TD,complex<double> * FD,int m)
+//一阶傅里叶变化
+{
+	int u,x;
+	double angle;
+	for(u = 0;u < m;u++)
+	{
+		FD[u]=0;
+		for(x = 0; x < m;x++)
+		{
+			angle = -2 * PI * u * x / m;
+			FD[u] += TD[x] * complex<double>(cos(angle),sin(angle));
 
+		}
+		FD[u] /= m;
+	}
+}
+void IFT(complex<double>* FD,complex<double> * TD,int m)
+//一阶傅里叶反变化
+{
+	int u,x;
+	double angle;
+	for(x = 0;x < m;x++)
+	{
+		TD[x]=0;
+		for(u = 0; u < m;u ++)
+		{
+			angle = 2 * PI * u * x / m;
+			TD[x] += FD[u] * complex<double>(cos(angle),sin(angle));
+
+		}
+	}
+}
+complex<double>* gFD=NULL;
+BOOL is_gFD_OK()
+{
+	return (gFD!=NULL);
+}
+
+void Fourier(){	
+	int w = lpBitsInfo->bmiHeader.biWidth;
+	int h = lpBitsInfo->bmiHeader.biHeight;
+	int LineBytes = (w * lpBitsInfo->bmiHeader.biBitCount + 31)/32 * 4;
+	BYTE* lpBits = (BYTE*)&lpBitsInfo->bmiColors[lpBitsInfo->bmiHeader.biClrUsed];
+
+	complex<double>* TD =new complex<double>[w*h];
+	complex<double>* FD =new complex<double>[w*h];
+
+	int i,j;
+	BYTE* pixel;
+	for(i = 0;i < h;i++)
+		{	
+			for(j = 0;j < w;j++)
+			{	
+				pixel = lpBits + LineBytes * (h - 1 - i) + j;
+				TD[w * i + j] = complex<double>(*pixel * pow(-1,i + j),0);
+				//
+			}
+		}
+	for(i=0;i<h;i++)
+		FT(&TD[i*w],&FD[i*w],w);
+	for(i=0;i<h;i++)
+		for(j=0;j<w;j++)
+			TD[j*h+i] = FD[i*w+j];
+	for(i=0;i<w;i++)
+		FT(&TD[i*h],&FD[i*h],h);
+
+	delete TD;
+	gFD=FD;
+
+
+	LONG size = 40 + 1024 + LineBytes * h;
+	lpDIB_FT = (BITMAPINFO*)malloc(size);
+	memcpy(lpDIB_FT,lpBitsInfo,size);
+	lpBits = (BYTE*)& lpDIB_FT->bmiColors[lpDIB_FT->bmiHeader.biClrUsed];
+
+	double temp;
+	for(i=0;i<h;i++){
+		for(j=0;j<w;j++){
+			pixel = lpBits + LineBytes * (h-1-i)+j;
+			temp = sqrt(FD[j * h + i].real() * FD[j * h + i].real() +
+						FD[j * h + i].imag() * FD[j * h + i].imag()) * 2000;
+			if(temp > 255)
+			{
+				temp = 255;
+			}
+			*pixel = (BYTE)(temp);
+		}
+	}
+}
+void IFourier(){
+	int w = lpBitsInfo->bmiHeader.biWidth;
+	int h = lpBitsInfo->bmiHeader.biHeight;
+	int LineBytes = (w * lpBitsInfo->bmiHeader.biBitCount + 31)/32 * 4;
+	BYTE* lpBits = (BYTE*)&lpBitsInfo->bmiColors[lpBitsInfo->bmiHeader.biClrUsed];
+
+	complex<double>* TD =new complex<double>[w*h];
+	complex<double>* FD =new complex<double>[w*h];
+
+	int i,j;
+	BYTE* pixel;
+	for(i = 0;i < h;i++)	
+			for(j = 0;j < w;j++)
+				FD[w * i + j] = gFD[h *j + i]; 
+				
+	for(i=0;i<h;i++)
+		IFT(&FD[i*w],&TD[i*w],w);
+	for(i=0;i<h;i++)
+		for(j=0;j<w;j++)
+			FD[j*h+i] = TD[i*w+j];
+	for(i=0;i<w;i++)
+		IFT(&FD[i*h],&TD[i*h],h);
+
+	LONG size = 40 + 1024 + LineBytes * h;
+	lpDIB_IFT = (BITMAPINFO*)malloc(size);
+	memcpy(lpDIB_IFT,lpBitsInfo,size);
+	lpBits = (BYTE*)& lpDIB_IFT->bmiColors[lpDIB_IFT->bmiHeader.biClrUsed];
+
+	for(i=0;i<h;i++){
+		for(j=0;j<w;j++){
+			pixel = lpBits + LineBytes * (h-1-i)+j;			
+			*pixel = (BYTE)(TD[h*j+i].real()/pow(-1,i+j));
+		}
+	}
+	delete FD;
+	delete TD;
+	delete gFD;
+	gFD = NULL;
+}

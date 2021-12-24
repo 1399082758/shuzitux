@@ -17,10 +17,10 @@ Class5=CMJ095View
 
 ResourceCount=5
 Resource1=IDD_IDD_HISTOGRAM_DIALOG
-Resource2=IDD_ABOUTBOX
+Resource2=IDR_MAINFRAME
 Class6=CDlgHistogram
 Resource3=IDD_DIALOGBAR (English (U.S.))
-Resource4=IDR_MAINFRAME
+Resource4=IDD_ABOUTBOX
 Class7=IDD_HISTOGRAM
 Class8=LINEDIALOG
 Resource5=IDD_LINDIALOG
@@ -44,7 +44,7 @@ Type=0
 BaseClass=CDialog
 HeaderFile=MJ095.cpp
 ImplementationFile=MJ095.cpp
-LastObject=ID_EQUALIZATION
+LastObject=ID_IFOURIER
 Filter=D
 VirtualFilter=dWC
 
@@ -60,7 +60,7 @@ Type=0
 BaseClass=CScrollView
 HeaderFile=MJ095View.h
 ImplementationFile=MJ095View.cpp
-LastObject=ID_EQUALIZATION
+LastObject=ID_FOURIER
 Filter=C
 VirtualFilter=VWC
 
@@ -88,7 +88,9 @@ Command9=ID_GRAY
 Command10=ID_Histogram
 Command11=ID_LINE
 Command12=ID_EQUALIZATION
-CommandCount=12
+Command13=ID_FOURIER
+Command14=ID_IFOURIER
+CommandCount=14
 
 [MNU:IDR_MAINFRAME]
 Type=1

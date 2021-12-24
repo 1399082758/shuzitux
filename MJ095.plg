@@ -6,13 +6,13 @@
 --------------------Configuration: MJ095 - Win32 Debug--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating temporary file "C:\Users\DELL\AppData\Local\Temp\RSP9019.tmp" with contents
+Creating temporary file "C:\Users\DELL\AppData\Local\Temp\RSP923F.tmp" with contents
 [
 /nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR"Debug/" /Fp"Debug/MJ095.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
-"F:\数字图像处理\MJ095\Bmp.cpp"
+"F:\数字图像处理\MJ095\shuzitux\Bmp.cpp"
 ]
-Creating command line "cl.exe @C:\Users\DELL\AppData\Local\Temp\RSP9019.tmp" 
-Creating temporary file "C:\Users\DELL\AppData\Local\Temp\RSP9029.tmp" with contents
+Creating command line "cl.exe @C:\Users\DELL\AppData\Local\Temp\RSP923F.tmp" 
+Creating temporary file "C:\Users\DELL\AppData\Local\Temp\RSP9240.tmp" with contents
 [
 /nologo /subsystem:windows /incremental:yes /pdb:"Debug/MJ095.pdb" /debug /machine:I386 /out:"Debug/MJ095.exe" /pdbtype:sept 
 ".\Debug\Bmp.obj"
@@ -25,7 +25,7 @@ Creating temporary file "C:\Users\DELL\AppData\Local\Temp\RSP9029.tmp" with cont
 ".\Debug\StdAfx.obj"
 ".\Debug\MJ095.res"
 ]
-Creating command line "link.exe @C:\Users\DELL\AppData\Local\Temp\RSP9029.tmp"
+Creating command line "link.exe @C:\Users\DELL\AppData\Local\Temp\RSP9240.tmp"
 <h3>Output Window</h3>
 Compiling...
 Bmp.cpp

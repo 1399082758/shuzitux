@@ -31,6 +31,10 @@ BEGIN_MESSAGE_MAP(CMJ095View, CScrollView)
 	ON_UPDATE_COMMAND_UI(ID_LINE, OnUpdateLine)
 	ON_COMMAND(ID_EQUALIZATION, OnEqualization)
 	ON_UPDATE_COMMAND_UI(ID_EQUALIZATION, OnUpdateEqualization)
+	ON_COMMAND(ID_FOURIER, OnFourier)
+	ON_UPDATE_COMMAND_UI(ID_FOURIER, OnUpdateFourier)
+	ON_COMMAND(ID_IFOURIER, OnIfourier)
+	ON_UPDATE_COMMAND_UI(ID_IFOURIER, OnUpdateIfourier)
 	//}}AFX_MSG_MAP
 	// Standard printing commands
 	ON_COMMAND(ID_FILE_PRINT, CScrollView::OnFilePrint)
@@ -63,6 +67,8 @@ BOOL CMJ095View::PreCreateWindow(CREATESTRUCT& cs)
 // CMJ095View drawing
 
 extern BITMAPINFO* lpBitsInfo;
+extern BITMAPINFO* lpDIB_FT;
+extern BITMAPINFO* lpDIB_IFT;
 
 void CMJ095View::OnDraw(CDC* pDC)
 {
@@ -80,8 +86,41 @@ void CMJ095View::OnDraw(CDC* pDC)
 	lpBits, // bitmap bits 
 	lpBitsInfo, // bitmap data 
 	DIB_RGB_COLORS, // usage options 
-	SRCCOPY // raster operation code 
-);
+	SRCCOPY); // raster operation code 
+
+	if(lpDIB_FT)
+	{
+		lpBits = (LPVOID)&lpDIB_FT->bmiColors[lpDIB_FT->bmiHeader.biClrUsed];
+		StretchDIBits(
+		pDC->GetSafeHdc(),
+		600,0,
+		lpDIB_FT->bmiHeader.biWidth,
+		lpDIB_FT->bmiHeader.biHeight,
+		0,0,
+		lpDIB_FT->bmiHeader.biWidth,
+		lpDIB_FT->bmiHeader.biHeight,
+		lpBits,
+		lpDIB_FT,
+		DIB_RGB_COLORS,
+		SRCCOPY);
+	}
+
+	if(lpDIB_IFT)
+	{
+		lpBits = (LPVOID)&lpDIB_IFT->bmiColors[lpDIB_IFT->bmiHeader.biClrUsed];
+		StretchDIBits(
+		pDC->GetSafeHdc(),
+		0,600,
+		lpDIB_IFT->bmiHeader.biWidth,
+		lpDIB_IFT->bmiHeader.biHeight,
+		0,0,
+		lpDIB_IFT->bmiHeader.biWidth,
+		lpDIB_IFT->bmiHeader.biHeight,
+		lpBits,
+		lpDIB_IFT,
+		DIB_RGB_COLORS,
+		SRCCOPY);
+	}
 
 }
 
@@ -216,4 +255,31 @@ void CMJ095View::OnUpdateEqualization(CCmdUI* pCmdUI)
 {
 	// TODO: Add your command update UI handler code here
 	pCmdUI->Enable(lpBitsInfo!=NULL && 4 < lpBitsInfo->bmiHeader.biBitCount);
+}
+void Fourier();
+void CMJ095View::OnFourier() 
+{
+	// TODO: Add your command handler code here
+	Fourier();
+	Invalidate();
+}
+bool if_gray();
+void CMJ095View::OnUpdateFourier(CCmdUI* pCmdUI) 
+{
+	// TODO: Add your command update UI handler code here
+	pCmdUI->Enable(lpBitsInfo!=NULL && if_gray());
+}
+BOOL is_gFD_OK();
+void IFourier();
+void CMJ095View::OnIfourier() 
+{
+	// TODO: Add your command handler code here
+	IFourier();
+	Invalidate();
+}
+
+void CMJ095View::OnUpdateIfourier(CCmdUI* pCmdUI) 
+{
+	// TODO: Add your command update UI handler code here
+	pCmdUI->Enable(lpBitsInfo!=NULL && is_gFD_OK());
 }
