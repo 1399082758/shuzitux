@@ -8,6 +8,9 @@
 #include "MJ095View.h"
 #include "IDD_HISTOGRAM.h"
 #include "LINEDIALOG.h"
+#include "FFT_FILTER.h"
+#include "FFT_BLPF.h"
+#include "FFT_GLPF.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -47,6 +50,12 @@ BEGIN_MESSAGE_MAP(CMJ095View, CScrollView)
 	ON_UPDATE_COMMAND_UI(ID_MID, OnUpdateMid)
 	ON_COMMAND(ID_GRAD, OnGrad)
 	ON_UPDATE_COMMAND_UI(ID_GRAD, OnUpdateGrad)
+	ON_COMMAND(ID_FILTER, OnFilter)
+	ON_UPDATE_COMMAND_UI(ID_FILTER, OnUpdateFilter)
+	ON_COMMAND(ID_BLPF, OnBlpf)
+	ON_UPDATE_COMMAND_UI(ID_BLPF, OnUpdateBlpf)
+	ON_COMMAND(ID_GLPF, OnGlpf)
+	ON_UPDATE_COMMAND_UI(ID_GLPF, OnUpdateGlpf)
 	//}}AFX_MSG_MAP
 	// Standard printing commands
 	ON_COMMAND(ID_FILE_PRINT, CScrollView::OnFilePrint)
@@ -105,7 +114,7 @@ void CMJ095View::OnDraw(CDC* pDC)
 		lpBits = (LPVOID)&lpDIB_FT->bmiColors[lpDIB_FT->bmiHeader.biClrUsed];
 		StretchDIBits(
 		pDC->GetSafeHdc(),
-		600,0,
+		515,0,
 		lpDIB_FT->bmiHeader.biWidth,
 		lpDIB_FT->bmiHeader.biHeight,
 		0,0,
@@ -122,7 +131,7 @@ void CMJ095View::OnDraw(CDC* pDC)
 		lpBits = (LPVOID)&lpDIB_IFT->bmiColors[lpDIB_IFT->bmiHeader.biClrUsed];
 		StretchDIBits(
 		pDC->GetSafeHdc(),
-		0,600,
+		1030,0,
 		lpDIB_IFT->bmiHeader.biWidth,
 		lpDIB_IFT->bmiHeader.biHeight,
 		0,0,
@@ -375,4 +384,46 @@ void CMJ095View::OnUpdateGrad(CCmdUI* pCmdUI)
 {
 	// TODO: Add your command update UI handler code here
 	pCmdUI->Enable(lpBitsInfo!=NULL && if_gray());
+}
+
+void CMJ095View::OnFilter() 
+{
+	// TODO: Add your command handler code here
+	FFT_FILTER dia;
+	dia.DoModal();
+	Invalidate();
+}
+
+void CMJ095View::OnUpdateFilter(CCmdUI* pCmdUI) 
+{
+	// TODO: Add your command update UI handler code here
+	pCmdUI->Enable(lpBitsInfo!=NULL && is_gFD_OK());
+}
+
+void CMJ095View::OnBlpf() 
+{
+	// TODO: Add your command handler code here
+	FFT_BLPF dia;
+	dia.DoModal();
+	Invalidate();
+}
+
+void CMJ095View::OnUpdateBlpf(CCmdUI* pCmdUI) 
+{
+	// TODO: Add your command update UI handler code here
+	pCmdUI->Enable(lpBitsInfo!=NULL && is_gFD_OK());
+}
+
+void CMJ095View::OnGlpf() 
+{
+	// TODO: Add your command handler code here
+	FFT_GLPF dia;
+	dia.DoModal();
+	Invalidate();
+}
+
+void CMJ095View::OnUpdateGlpf(CCmdUI* pCmdUI) 
+{
+	// TODO: Add your command update UI handler code here
+	pCmdUI->Enable(lpBitsInfo!=NULL && is_gFD_OK());
 }

@@ -7,6 +7,9 @@
 #define IDR_MAINFRAME                   128
 #define IDR_MJ095TYPE                   129
 #define IDD_LINDIALOG                   132
+#define IDD_FFT_FILTER                  133
+#define IDD_FFT_BLPF                    134
+#define IDD_FFT_GLPF                    135
 #define IDC_EDIT1                       1004
 #define IDC_EDIT2                       1005
 #define ID_GRAY                         32773
@@ -21,14 +24,17 @@
 #define ID_RAPLAS                       32787
 #define ID_MID                          32789
 #define ID_GRAD                         32791
+#define ID_FILTER                       32792
+#define ID_BLPF                         32793
+#define ID_GLPF                         32794
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        133
-#define _APS_NEXT_COMMAND_VALUE         32792
+#define _APS_NEXT_RESOURCE_VALUE        136
+#define _APS_NEXT_COMMAND_VALUE         32795
 #define _APS_NEXT_CONTROL_VALUE         1006
 #define _APS_NEXT_SYMED_VALUE           104
 #endif

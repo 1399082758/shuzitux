@@ -94,6 +94,18 @@ SOURCE=.\Bmp.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\FFT_BLPF.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\FFT_FILTER.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\FFT_GLPF.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\IDD_HISTOGRAM.cpp
 # End Source File
 # Begin Source File
@@ -129,6 +141,18 @@ SOURCE=.\StdAfx.cpp
 # Begin Group "Header Files"
 
 # PROP Default_Filter "h;hpp;hxx;hm;inl"
+# Begin Source File
+
+SOURCE=.\FFT_BLPF.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\FFT_FILTER.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\FFT_GLPF.h
+# End Source File
 # Begin Source File
 
 SOURCE=.\IDD_HISTOGRAM.h

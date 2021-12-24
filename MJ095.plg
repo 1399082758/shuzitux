@@ -6,19 +6,19 @@
 --------------------Configuration: MJ095 - Win32 Debug--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating command line "rc.exe /l 0x804 /fo"Debug/MJ095.res" /d "_DEBUG" /d "_AFXDLL" "F:\数字图像处理\MJ095\shuzitux\MJ095.rc"" 
-Creating temporary file "C:\Users\DELL\AppData\Local\Temp\RSP587B.tmp" with contents
+Creating temporary file "C:\Users\DELL\AppData\Local\Temp\RSP91B6.tmp" with contents
 [
 /nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR"Debug/" /Fp"Debug/MJ095.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
-"F:\数字图像处理\MJ095\shuzitux\Bmp.cpp"
-"F:\数字图像处理\MJ095\shuzitux\MJ095.cpp"
 "F:\数字图像处理\MJ095\shuzitux\MJ095View.cpp"
 ]
-Creating command line "cl.exe @C:\Users\DELL\AppData\Local\Temp\RSP587B.tmp" 
-Creating temporary file "C:\Users\DELL\AppData\Local\Temp\RSP587C.tmp" with contents
+Creating command line "cl.exe @C:\Users\DELL\AppData\Local\Temp\RSP91B6.tmp" 
+Creating temporary file "C:\Users\DELL\AppData\Local\Temp\RSP91B7.tmp" with contents
 [
 /nologo /subsystem:windows /incremental:yes /pdb:"Debug/MJ095.pdb" /debug /machine:I386 /out:"Debug/MJ095.exe" /pdbtype:sept 
 ".\Debug\Bmp.obj"
+".\Debug\FFT_BLPF.obj"
+".\Debug\FFT_FILTER.obj"
+".\Debug\FFT_GLPF.obj"
 ".\Debug\IDD_HISTOGRAM.obj"
 ".\Debug\LINEDIALOG.obj"
 ".\Debug\MainFrm.obj"
@@ -28,17 +28,10 @@ Creating temporary file "C:\Users\DELL\AppData\Local\Temp\RSP587C.tmp" with cont
 ".\Debug\StdAfx.obj"
 ".\Debug\MJ095.res"
 ]
-Creating command line "link.exe @C:\Users\DELL\AppData\Local\Temp\RSP587C.tmp"
+Creating command line "link.exe @C:\Users\DELL\AppData\Local\Temp\RSP91B7.tmp"
 <h3>Output Window</h3>
-Compiling resources...
 Compiling...
-Bmp.cpp
-F:\数字图像处理\MJ095\shuzitux\Bmp.cpp(1035) : warning C4101: 'k' : unreferenced local variable
-F:\数字图像处理\MJ095\shuzitux\Bmp.cpp(1035) : warning C4101: 'l' : unreferenced local variable
 MJ095View.cpp
-Generating Code...
-Skipping... (no relevant changes detected)
-MJ095.cpp
 Linking...
 
 

@@ -2,28 +2,34 @@
 
 [General Info]
 Version=1
-LastClass=CMJ095View
+LastClass=FFT_BLPF
 LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "mj095.h"
 LastPage=0
 
-ClassCount=8
+ClassCount=11
 Class1=CMainFrame
 Class2=CMJ095App
 Class3=CAboutDlg
 Class4=CMJ095Doc
 Class5=CMJ095View
 
-ResourceCount=5
-Resource1=IDD_ABOUTBOX
+ResourceCount=8
+Resource1=IDD_IDD_HISTOGRAM_DIALOG
 Resource2=IDR_MAINFRAME
 Class6=CDlgHistogram
 Resource3=IDD_DIALOGBAR (English (U.S.))
-Resource4=IDD_IDD_HISTOGRAM_DIALOG
+Resource4=IDD_LINDIALOG
 Class7=IDD_HISTOGRAM
 Class8=LINEDIALOG
-Resource5=IDD_LINDIALOG
+Resource5=IDD_FFT_FILTER
+Resource6=IDD_FFT_BLPF
+Resource7=IDD_ABOUTBOX
+Class9=FFT_FILTER
+Class10=FFT_GLPF
+Class11=FFT_BLPF
+Resource8=IDD_FFT_GLPF
 
 [CLS:CMainFrame]
 Type=0
@@ -60,7 +66,7 @@ Type=0
 BaseClass=CScrollView
 HeaderFile=MJ095View.h
 ImplementationFile=MJ095View.cpp
-LastObject=ID_GRAD
+LastObject=ID_GLPF
 Filter=C
 VirtualFilter=VWC
 
@@ -96,7 +102,10 @@ Command17=ID_AVG
 Command18=ID_MID
 Command19=ID_GRAD
 Command20=ID_RAPLAS
-CommandCount=20
+Command21=ID_FILTER
+Command22=ID_BLPF
+Command23=ID_GLPF
+CommandCount=23
 
 [MNU:IDR_MAINFRAME]
 Type=1
@@ -189,4 +198,61 @@ BaseClass=CDialog
 Filter=D
 LastObject=ID_APP_ABOUT
 VirtualFilter=dWC
+
+[DLG:IDD_FFT_FILTER]
+Type=1
+Class=FFT_FILTER
+ControlCount=5
+Control1=IDOK,button,1342242817
+Control2=IDCANCEL,button,1342242816
+Control3=IDC_EDIT1,edit,1350631552
+Control4=IDC_STATIC,static,1342308352
+Control5=IDC_STATIC,static,1342308352
+
+[DLG:IDD_FFT_BLPF]
+Type=1
+Class=FFT_BLPF
+ControlCount=5
+Control1=IDOK,button,1342242817
+Control2=IDCANCEL,button,1342242816
+Control3=IDC_EDIT1,edit,1350631552
+Control4=IDC_STATIC,static,1342308352
+Control5=IDC_STATIC,static,1342308352
+
+[DLG:IDD_FFT_GLPF]
+Type=1
+Class=FFT_GLPF
+ControlCount=5
+Control1=IDOK,button,1342242817
+Control2=IDCANCEL,button,1342242816
+Control3=IDC_EDIT1,edit,1350631552
+Control4=IDC_STATIC,static,1342308352
+Control5=IDC_STATIC,static,1342308352
+
+[CLS:FFT_FILTER]
+Type=0
+HeaderFile=FFT_FILTER.h
+ImplementationFile=FFT_FILTER.cpp
+BaseClass=CDialog
+Filter=D
+LastObject=IDOK
+VirtualFilter=dWC
+
+[CLS:FFT_GLPF]
+Type=0
+HeaderFile=FFT_GLPF.h
+ImplementationFile=FFT_GLPF.cpp
+BaseClass=CDialog
+Filter=D
+LastObject=IDOK
+VirtualFilter=dWC
+
+[CLS:FFT_BLPF]
+Type=0
+HeaderFile=FFT_BLPF.h
+ImplementationFile=FFT_BLPF.cpp
+BaseClass=CDialog
+Filter=D
+VirtualFilter=dWC
+LastObject=IDC_EDIT1
 

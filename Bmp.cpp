@@ -1032,7 +1032,7 @@ void GradSharp(){
 	BYTE* new_lpBits = (BYTE*)&new_lpBitsInfo->bmiColors[new_lpBitsInfo->bmiHeader.biClrUsed]; //指向位图数据的指针
 
 
-	int i,j,k,l;
+	int i,j;
 	BYTE *pixel,*pixel1,*pixel2;
 	BYTE *new_pixel;
 	BYTE temp;
@@ -1051,4 +1051,141 @@ void GradSharp(){
 	}
 	free(lpBitsInfo);
 	lpBitsInfo=new_lpBitsInfo;   //用新图像替换 原图像
+}
+void FFT_Filter(int D){
+	int w = lpDIB_FT->bmiHeader.biWidth;
+	int h = lpDIB_FT->bmiHeader.biHeight;
+	int LineBytes = (w * lpDIB_FT->bmiHeader.biBitCount + 31)/32 * 4;
+	BYTE* lpBits = (BYTE*)&lpDIB_FT->bmiColors[lpDIB_FT->bmiHeader.biClrUsed];
+	
+	complex<double>* origin_FD = new complex<double>[w * h];
+	for(int n=0;n<w*h;n++){
+		origin_FD[n]=gFD[n];
+	}
+	int i,j;
+	double dis;
+	for(i=0;i<h;i++){
+		for(j=0;j<w;j++){
+			dis = sqrt((i - h/2)*(i - h/2)+(j - w/2)*(j - w/2)+1);
+			if(D>0)//LOW
+			{
+				if(dis>D)
+					gFD[i*w+j]=0;
+			}
+			else//HIGH
+			{
+				if(dis<-D)
+					gFD[i*w+j]=0;
+			}
+		}
+	}
+	double temp;
+	BYTE* pixel;
+	for(i = 0;i < h;i++)
+	{
+		for(j = 0; j < w;j++)
+		{
+			pixel = lpBits + LineBytes * (h - 1 - i) + j;
+			temp = sqrt(gFD[j * h + i].real()*gFD[j * h + i].real()+
+				gFD[j * h + i].imag()*gFD[j * h + i].imag())*2000;
+			if(temp > 255)
+				temp = 255;
+			*pixel = (BYTE)(temp);
+		}
+	}
+
+	IFFourier();
+
+	delete gFD;
+	gFD = origin_FD;
+}
+void FFT_BLPFF(int D){
+	int w = lpDIB_FT->bmiHeader.biWidth;
+	int h = lpDIB_FT->bmiHeader.biHeight;
+	int LineBytes = (w * lpDIB_FT->bmiHeader.biBitCount + 31)/32 * 4;
+	BYTE* lpBits = (BYTE*)&lpDIB_FT->bmiColors[lpDIB_FT->bmiHeader.biClrUsed];
+	
+	complex<double>* origin_FD = new complex<double>[w * h];
+	for(int n=0;n<w*h;n++){
+		origin_FD[n]=gFD[n];
+	}
+	int i,j;
+	double dis;
+	for(i=0;i<h;i++){
+		for(j=0;j<w;j++){
+			dis = sqrt((i - h/2)*(i - h/2)+(j - w/2)*(j - w/2)+1);
+			if(D>0)//LOW
+			{
+				gFD[i* h + j] *=  1/(1 + pow(dis/D,4)) ;
+			}
+			else//HIGH
+			{
+			gFD[i* h + j] *= 1 - 1/(1 + pow(dis/D,4)) ;
+			}
+		}
+	}
+	double temp;
+	BYTE* pixel;
+	for(i = 0;i < h;i++)
+	{
+		for(j = 0; j < w;j++)
+		{
+			pixel = lpBits + LineBytes * (h - 1 - i) + j;
+			temp = sqrt(gFD[j * h + i].real()*gFD[j * h + i].real()+
+				gFD[j * h + i].imag()*gFD[j * h + i].imag())*2000;
+			if(temp > 255)
+				temp = 255;
+			*pixel = (BYTE)(temp);
+		}
+	}
+
+	IFFourier();
+
+	delete gFD;
+	gFD = origin_FD;
+}
+void FFT_GLPFF(int D){
+	int w = lpDIB_FT->bmiHeader.biWidth;
+	int h = lpDIB_FT->bmiHeader.biHeight;
+	int LineBytes = (w * lpDIB_FT->bmiHeader.biBitCount + 31)/32 * 4;
+	BYTE* lpBits = (BYTE*)&lpDIB_FT->bmiColors[lpDIB_FT->bmiHeader.biClrUsed];
+	
+	complex<double>* origin_FD = new complex<double>[w * h];
+	for(int n=0;n<w*h;n++){
+		origin_FD[n]=gFD[n];
+	}
+	int i,j;
+	double dis;
+	for(i=0;i<h;i++){
+		for(j=0;j<w;j++){
+			dis = sqrt((i - h/2)*(i - h/2)+(j - w/2)*(j - w/2)+1);
+			if(D>0)//LOW
+			{
+				gFD[i* h + j] *=  exp(-pow(dis,2)/(2*D*D));
+			}
+			else//HIGH
+			{
+				gFD[i* h + j] *= 1 - exp(-pow(dis,2)/(2*D*D)) ;
+			}
+		}
+	}
+	double temp;
+	BYTE* pixel;
+	for(i = 0;i < h;i++)
+	{
+		for(j = 0; j < w;j++)
+		{
+			pixel = lpBits + LineBytes * (h - 1 - i) + j;
+			temp = sqrt(gFD[j * h + i].real()*gFD[j * h + i].real()+
+				gFD[j * h + i].imag()*gFD[j * h + i].imag())*2000;
+			if(temp > 255)
+				temp = 255;
+			*pixel = (BYTE)(temp);
+		}
+	}
+
+	IFFourier();
+
+	delete gFD;
+	gFD = origin_FD;
 }

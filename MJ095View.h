@@ -74,6 +74,12 @@ protected:
 	afx_msg void OnUpdateMid(CCmdUI* pCmdUI);
 	afx_msg void OnGrad();
 	afx_msg void OnUpdateGrad(CCmdUI* pCmdUI);
+	afx_msg void OnFilter();
+	afx_msg void OnUpdateFilter(CCmdUI* pCmdUI);
+	afx_msg void OnBlpf();
+	afx_msg void OnUpdateBlpf(CCmdUI* pCmdUI);
+	afx_msg void OnGlpf();
+	afx_msg void OnUpdateGlpf(CCmdUI* pCmdUI);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };
