@@ -35,6 +35,18 @@ BEGIN_MESSAGE_MAP(CMJ095View, CScrollView)
 	ON_UPDATE_COMMAND_UI(ID_FOURIER, OnUpdateFourier)
 	ON_COMMAND(ID_IFOURIER, OnIfourier)
 	ON_UPDATE_COMMAND_UI(ID_IFOURIER, OnUpdateIfourier)
+	ON_COMMAND(ID_IFASTFOURIER, OnIfastfourier)
+	ON_UPDATE_COMMAND_UI(ID_IFASTFOURIER, OnUpdateIfastfourier)
+	ON_COMMAND(ID_FASTFOURIER, OnFastfourier)
+	ON_UPDATE_COMMAND_UI(ID_FASTFOURIER, OnUpdateFastfourier)
+	ON_COMMAND(ID_AVG, OnAvg)
+	ON_UPDATE_COMMAND_UI(ID_AVG, OnUpdateAvg)
+	ON_COMMAND(ID_RAPLAS, OnRaplas)
+	ON_UPDATE_COMMAND_UI(ID_RAPLAS, OnUpdateRaplas)
+	ON_COMMAND(ID_MID, OnMid)
+	ON_UPDATE_COMMAND_UI(ID_MID, OnUpdateMid)
+	ON_COMMAND(ID_GRAD, OnGrad)
+	ON_UPDATE_COMMAND_UI(ID_GRAD, OnUpdateGrad)
 	//}}AFX_MSG_MAP
 	// Standard printing commands
 	ON_COMMAND(ID_FILE_PRINT, CScrollView::OnFilePrint)
@@ -244,6 +256,7 @@ void CMJ095View::OnUpdateLine(CCmdUI* pCmdUI)
 }
 void equalization();
 void Histogram();
+bool if_equalization();
 void CMJ095View::OnEqualization() 
 {
 	// TODO: Add your command handler code here
@@ -254,7 +267,7 @@ void CMJ095View::OnEqualization()
 void CMJ095View::OnUpdateEqualization(CCmdUI* pCmdUI) 
 {
 	// TODO: Add your command update UI handler code here
-	pCmdUI->Enable(lpBitsInfo!=NULL && 4 < lpBitsInfo->bmiHeader.biBitCount);
+	pCmdUI->Enable(lpBitsInfo!=NULL && if_equalization());
 }
 void Fourier();
 void CMJ095View::OnFourier() 
@@ -277,9 +290,89 @@ void CMJ095View::OnIfourier()
 	IFourier();
 	Invalidate();
 }
-
+void FFourier();
+void IFFourier();
 void CMJ095View::OnUpdateIfourier(CCmdUI* pCmdUI) 
 {
 	// TODO: Add your command update UI handler code here
 	pCmdUI->Enable(lpBitsInfo!=NULL && is_gFD_OK());
+}
+
+void CMJ095View::OnIfastfourier() 
+{
+	// TODO: Add your command handler code here
+	IFFourier();
+	Invalidate();
+}
+
+void CMJ095View::OnUpdateIfastfourier(CCmdUI* pCmdUI) 
+{
+	// TODO: Add your command update UI handler code here
+	pCmdUI->Enable(lpBitsInfo!=NULL && is_gFD_OK());
+}
+
+void CMJ095View::OnFastfourier() 
+{
+	// TODO: Add your command handler code here
+	FFourier();
+	Invalidate();
+}
+
+void CMJ095View::OnUpdateFastfourier(CCmdUI* pCmdUI) 
+{
+	// TODO: Add your command update UI handler code here
+	pCmdUI->Enable(lpBitsInfo!=NULL && if_gray());
+}
+void AverageFilter();
+void RaplasSharp();
+void CMJ095View::OnAvg() 
+{
+	// TODO: Add your command handler code here
+	AverageFilter();
+	Invalidate();
+}
+
+void CMJ095View::OnUpdateAvg(CCmdUI* pCmdUI) 
+{
+	// TODO: Add your command update UI handler code here
+	pCmdUI->Enable(lpBitsInfo!=NULL && if_gray());
+}
+
+void CMJ095View::OnRaplas() 
+{
+	// TODO: Add your command handler code here
+	RaplasSharp();
+	Invalidate();
+}
+
+void CMJ095View::OnUpdateRaplas(CCmdUI* pCmdUI) 
+{
+	// TODO: Add your command update UI handler code here
+	pCmdUI->Enable(lpBitsInfo!=NULL && if_gray());
+}
+void MedianFilter();
+void CMJ095View::OnMid() 
+{
+	// TODO: Add your command handler code here
+	MedianFilter();
+	Invalidate();
+}
+
+void CMJ095View::OnUpdateMid(CCmdUI* pCmdUI) 
+{
+	// TODO: Add your command update UI handler code here
+	pCmdUI->Enable(lpBitsInfo!=NULL && if_gray());
+}
+void GradSharp();
+void CMJ095View::OnGrad() 
+{
+	// TODO: Add your command handler code here
+	GradSharp();
+	Invalidate();
+}
+
+void CMJ095View::OnUpdateGrad(CCmdUI* pCmdUI) 
+{
+	// TODO: Add your command update UI handler code here
+	pCmdUI->Enable(lpBitsInfo!=NULL && if_gray());
 }
